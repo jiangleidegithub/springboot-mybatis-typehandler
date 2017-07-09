@@ -1,0 +1,95 @@
+package com.jianglei.mstransfer.utils;
+
+import java.lang.reflect.Field;
+
+/**
+ * 从FHADMIN框架复制来的工具 old说明：反射工具 创建人：FH Q313596790 修改时间：2014年9月20日
+ * 
+ * @version
+ */
+public class ReflectHelper {
+	/**
+	 * 获取obj对象fieldName的Field
+	 * 
+	 * @param obj
+	 * @param fieldName
+	 * @return
+	 */
+	public static Field getFieldByFieldName(Object obj, String fieldName) {
+		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass
+				.getSuperclass()) {
+			try {
+				return superClass.getDeclaredField(fieldName);
+			} catch (NoSuchFieldException e) {
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 获取obj对象fieldName的属性值
+	 * 
+	 * @param obj
+	 * @param fieldName
+	 * @return
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	public static Object getValueByFieldName(Object obj, String fieldName)
+			throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Field field = getFieldByFieldName(obj, fieldName);
+		Object value = null;
+		if (field != null) {
+			if (field.isAccessible()) {
+				value = field.get(obj);
+			} else {
+				field.setAccessible(true);
+				value = field.get(obj);
+				field.setAccessible(false);
+			}
+		}
+		return value;
+	}
+
+	/**
+	 * 设置obj对象fieldName的属性值
+	 * 
+	 * @param obj
+	 * @param fieldName
+	 * @param value
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	public static void setValueByFieldName(Object obj, String fieldName, Object value)
+			throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Field field = obj.getClass().getDeclaredField(fieldName);
+		if (field.isAccessible()) {
+			field.set(obj, value);
+		} else {
+			field.setAccessible(true);
+			field.set(obj, value);
+			field.setAccessible(false);
+		}
+	}
+
+	/**
+	 * 将字段值从源对象复制到目标对象
+	 * 
+	 * @param source
+	 * @param dest
+	 * @param fieldName
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	public static void copyFieldValue(Object source, Object dest, String fieldName)
+			throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Object val = getValueByFieldName(source, fieldName);
+		setValueByFieldName(dest, fieldName, val);
+	}
+}
