@@ -16,6 +16,15 @@ spring:
     # 配置一个连接在池中最小生存的时间，单位是毫秒 
     minEvictableIdleTimeMillis: 300000
 
+# 其他数据库
+custom.datasource:
+    names: ds1
+    ds1.type: com.alibaba.druid.pool.DruidDataSource
+    ds1.driverClassName: com.mysql.jdbc.Driver
+    ds1.url:  jdbc:mysql://192.168.0.7:3306/datatest?&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+    ds1.username: root
+    ds1.password: 123456
+
 mybatis:
   #config-location: classpath:mybatis-config.xml
   type-aliases-package: com.jianglei.mstransfer.model

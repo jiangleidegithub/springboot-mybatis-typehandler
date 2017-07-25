@@ -2,10 +2,10 @@ package com.jianglei.mstransfer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
-import com.jianglei.mstransfer.dao.CommonDao;
-
+import com.jianglei.mstransfer.datasource.DynamicDataSourceRegister;
+@Import(DynamicDataSourceRegister.class)
 @SpringBootApplication
 public class MsTransferApplication {
 

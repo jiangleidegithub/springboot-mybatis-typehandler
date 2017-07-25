@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.jianglei.mstransfer.dao.CommonDao;
 import com.jianglei.mstransfer.model.OtherInfo2;
 import com.jianglei.mstransfer.model.User;
+import com.jianglei.mstransfer.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,15 +19,13 @@ public class MsTransferApplicationTests {
 	
 	@Autowired
 	private CommonDao dao;
+	@Autowired
+	private UserService userService;
 	
 	@Test
 	public void test1() {
 		try {
-			
-			User user = dao.selectOne("user.get", 1);
-			List<OtherInfo2> list = user.getList();
-			System.out.println(list);
-			System.out.println(user.getArray());
+			userService.test();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

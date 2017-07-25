@@ -27,21 +27,18 @@ public class JSONTypeHandler<T extends Object> extends BaseTypeHandler<T> {
 		ps.setObject(i, (T) JSON.parseObject(parameter.toString(), clazz));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public T getNullableResult(ResultSet rs, String columnName) throws SQLException {
 		T parse = (T) JSON.parseObject(rs.getString(columnName),clazz);
 		return parse;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public T getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
 		T parse = (T) JSON.parseObject(rs.getString(columnIndex),clazz);
 		return parse;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public T getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
 		T parse = (T) JSON.parseObject(cs.getString(columnIndex),clazz);
