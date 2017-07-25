@@ -26,6 +26,7 @@ public class MsTransferApplicationTests {
 			User user = dao.selectOne("user.get", 1);
 			List<OtherInfo2> list = user.getList();
 			System.out.println(list);
+			System.out.println(user.getArray());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

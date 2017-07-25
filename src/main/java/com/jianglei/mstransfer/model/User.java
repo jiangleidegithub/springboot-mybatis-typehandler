@@ -21,7 +21,7 @@ public class User implements Serializable {
 
 	private List<OtherInfo2> list;
 
-	public Integer getId() {
+	public Integer getId() { 
 		return id;
 	}
 
